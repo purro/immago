@@ -1,6 +1,6 @@
 from datetime import datetime
 from pyramid.response import Response
-from pyramid.view import view_config
+from pyramid.view import view_config, notfound_view_config
 import transaction
 
 from pyramid.httpexceptions import (
@@ -41,26 +41,14 @@ def thread(request):
   thread_id = request.matchdict['thread_id']
   thread = DBSession.query(Thread).get(thread_id)
   if thread is None:
-    return HTTPNotFound('No such thread')
+    raise HTTPNotFound(comment='No such thread.').exception
   return {'thread':thread}
 
 @view_config(route_name='home', renderer='home.mak')
 def my_view(request):
     return {}
 
-conn_err_msg = """\
-Pyramid is having a problem using your SQL database.  The problem
-might be caused by one of the following things:
-
-1.  You may need to run the "initialize_immago_db" script
-    to initialize your database tables.  Check your virtual 
-    environment's "bin" directory for this script and try to run it.
-
-2.  Your database server may not be running.  Check that the
-    database server referred to by the "sqlalchemy.url" setting in
-    your "development.ini" file is running.
-
-After you fix the problem, please restart the Pyramid application to
-try it again.
-"""
-
+@notfound_view_config(renderer='404.mak')
+def notfound(context, request):
+  msg =  request.exception.comment
+  return {'message':msg}
