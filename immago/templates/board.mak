@@ -1,3 +1,5 @@
+<%inherit file="base.html"/>
+
 <%include file="post_form.html"/>
 
 % for thread in latest_threads:
