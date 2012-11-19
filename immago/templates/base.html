@@ -8,29 +8,59 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title></title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="shortcut icon" href="${request.static_url('immago:static/favicon.ico')}">
 
+        <!--<link rel="stylesheet"-->
+        <!--href="${request.static_url('immago:static/css/normalize.css')}">-->
+        <!--<link rel="stylesheet"-->
+        <!--href="${request.static_url('immago:static/css/main.css')}">-->
         <link rel="stylesheet"
-        href="${request.static_url('immago:static/css/normalize.css')}">
+        href="${request.static_url('immago:static/css/default.css')}">
         <link rel="stylesheet"
-        href="${request.static_url('immago:static/css/main.css')}">
-        <script
-          src="${request.static_url('immago:static/js/vendor/modernizr-2.6.2.min.js')}"></script>
+        href="${request.static_url('immago:static/css/bootstrap.min.css')}" media="screen">
+        <link rel="stylesheet"
+        href="${request.static_url('immago:static/css/bootstrap-responsive.min.css')}" media="screen">
+        <!--<script-->
+          <!--src="${request.static_url('immago:static/js/vendor/modernizr-2.6.2.min.js')}"></script>-->
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+          <div class="navbar-inner">
+            <div class="container">
+              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </a>
 
-        ${self.body()}
+              <a class="brand" href="${request.route_path('home')}">Immago</a>
+
+              <div class="nav-collapse collapse">
+                <ul class="nav">
+                  <li class="active"><a href="${request.route_path('home')}">Home</a></li>
+                  <li><a href="${request.route_path('board')}">Board</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          ${self.body()}
+        </div> 
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script
             src="${request.static_url('immago:static/js/vendor/jquery-1.8.2.min.js')}"><\/script>')</script>
           <script src="${request.static_url('immago:static/js/plugins.js')}"></script>
           <script src="${request.static_url('immago:static/js/main.js')}"></script>
+          <script
+            src="${request.static_url('immago:static/js/vendor/bootstrap.min.js')}"></script>
 
     </body>
 </html>
