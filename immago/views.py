@@ -9,6 +9,7 @@ from pyramid.httpexceptions import (
     )
 
 from sqlalchemy.exc import DBAPIError
+from sqlalchemy import desc, asc
 
 from .models import (
     DBSession,
@@ -24,16 +25,17 @@ def board(request):
       t = DBSession.query(Thread).get(request.params['thread_id'])
       if t is None:
         return HTTPNotFound('No such thread')
+      t.updated = now
     else:
       t = Thread(now, now)
-      DBSession.add(t)
-      DBSession.flush()
+    DBSession.add(t)
+    DBSession.flush()
     p = Post(t.id, now, request.params['msg'])
     DBSession.add(p)
     url = request.route_url('board') 
     return HTTPFound(location=url)
 
-  latest_threads = DBSession.query(Thread).order_by(Thread.updated).limit(5)
+  latest_threads = DBSession.query(Thread).order_by(desc(Thread.updated)).limit(5)
   return {'latest_threads':latest_threads}
 
 @view_config(route_name='thread', renderer='thread.mak')
