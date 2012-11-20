@@ -3,9 +3,14 @@
 <%include file="post_form.html"/>
 
 % for thread in latest_threads:
-	<a href="${request.route_path('thread', thread_id=thread.id)}">Reply</a>
-	% for post in thread.posts:
-		${post.msg} <br />
-	% endfor
+	<div class="row">
+		<a href="${request.route_path('thread', thread_id=thread.id)}">Reply</a>
+		<br/>
+		<div class="indent">
+			% for post in thread.posts:
+				<%include file="post_template.html" args="post=post"/>
+			% endfor
+		</div>
+	</div>
 % endfor
 

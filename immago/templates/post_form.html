@@ -1,11 +1,15 @@
 <%page args="thread_id=-1"/>
 
-<form action="${request.route_path('board')}" method="post">
-  
-  % if thread_id != -1:
-    <input type="hidden" name="thread_id" value="${thread_id}"/>
-  % endif
-  <textarea name="msg" rows="10" cols="60">
-  </textarea><br/>
-  <input type="submit" name="form.submitted" value="Post"/>
-</form>
+<div class="row">
+	<div class="offset3 span4">
+    <form class="well" action="${request.route_path('board')}" method="post">
+      
+      % if thread_id != -1:
+        <input type="hidden" name="thread_id" value="${thread_id}"/>
+      % endif
+      <textarea name="msg" rows="3" class="input-xlarge">
+      </textarea><br/>
+      <input type="submit" name="form.submitted" value="Post"/>
+    </form>
+	</div>
+</div>
