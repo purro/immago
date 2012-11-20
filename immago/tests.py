@@ -1,9 +1,9 @@
 import unittest
-import transaction
 
 from pyramid import testing
 
 from .models import DBSession
+
 
 class TestMyView(unittest.TestCase):
     def setUp(self):
@@ -12,7 +12,7 @@ class TestMyView(unittest.TestCase):
         engine = create_engine('sqlite://')
         from .models import (
             Base,
-            )
+        )
         DBSession.configure(bind=engine)
         Base.metadata.create_all(engine)
         #with transaction.manager:
